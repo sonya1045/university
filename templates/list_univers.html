@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <h1>----------------------- ВНЗ України -----------------------</h1>
+    <h2>ТОП-10</h2>
+    <hr>
+    <section class="card-section-new">
+        <div class="container-new">
+            <ul class="new">
+                {% for unic in universities %}
+                <li class="card">
+                    <article class="card-article">
+                            {% if unic.photo %}
+                                {% if unic.photo.url|lower|slice:"-4:" == ".jpg" or unic.photo.url|lower|slice:"-4:" == ".png" or unic.photo.url|lower|slice:"-5:" == ".jpeg" %}
+                                <img class="card-img" src="{{ unic.photo.url }}" alt="picture">
+                                {% else %}
+                                    <a href="{{ unic.photo.url }}">Load</a>
+                                {% endif %}
+                            {% endif %}
+                        <div class="card-bottom">
+                            <div class="card-bottom-text">
+                                <b><p class="title">
+                                    {{unic.name}} 
+                                <div class="price-rating">
+                                </div>
+                                </p></b>
+                                <hr>
+                                <p class="title">
+                                    {{unic.discriptions}}
+                                </p>
+                            </div>
+                        </div>
+                    </article>                  
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+    <hr>
+</body>
+</html>
